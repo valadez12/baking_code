@@ -58,8 +58,7 @@ body{
 #bread {
    background-image:url(images/bread.png);
    height: 300px;
-   background-size: cover;
-   background-repeat:no-repeat;
+   width: 622px;
 }
 #puppies {
    background-image:url(images/puppies.PNG);
