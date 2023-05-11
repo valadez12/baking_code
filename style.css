@@ -3,33 +3,10 @@ body{
 	font-family: 'EB+Garamond', serif;
 }
 /* header*/
-h1{
-  text-align: center;
-  font-size: 4em;
-  color: darkgreen;
-}
 .logo{
 margin: 0 auto;
 display:block;
 }
-
-h2{
-  color: darkgreen;
-}
-a:link{
-color: purple;
-}
-a:visited{
-color: purple;
-}
-a:hover{
-color: blue;
-}
-a:active{
-color: black;
-}
-
-/* Vertical Navigation bar*/
 nav{
   background-color: #EBA312;
   border-top: 2px #EBA312;
@@ -66,29 +43,40 @@ body{
 	font-family: 'Source Sans Pro', sans-serif;
 	margin: 0;
 }
-#wrapper {
-   background-color: #ffffff;
-}
-#homehero {
-   background-image:url(image/cupcake.jpg);
+#cupcake {
+   background-image:url(images/cupcake.jpg);
    height: 300px;
    background-size: cover;
    background-repeat:no-repeat;
 }
 #cookies {
-   background-image:url(image/cookies.jpg);
+   background-image:url(images/cookies.jpg);
    height: 300px;
    background-size: cover;
    background-repeat:no-repeat;
 }
 #bread {
-   background-image:url(image/bread.PNG);
+   background-image:url(images/bread.PNG);
    height: 300px;
    background-size: cover;
    background-repeat:no-repeat;
 }
+#puppies {
+   background-image:url(images/puppies.PNG);
+   height: 300px;
+   width: 361px;
+   background-size: cover;
+   background-repeat:no-repeat;
+}
+#animals {
+   background-image:url(images/animals.PNG);
+   height: 381px;
+   width: 361px;
+   background-size: cover;
+   background-repeat:no-repeat;
+}
 #tea {
-   background-image:url(image/tea.jpg);
+   background-image:url(images/tea.jpg);
    height: 300px;
    background-size: cover;
    background-repeat:no-repeat;
@@ -113,9 +101,9 @@ main{
   max-width: 50%;
   padding: 20px;
   margin: 10px;
-  background-color: darkgreen;
+  background-color: #EBA312;
   color: white;
-  font-size: 20px;
+  font-size: 10px;
   margin: 0;
   justify-content: center;
 }
@@ -123,9 +111,9 @@ main{
   max-width: 50%;
   padding: 20px;
   margin: 10px;
-  background-color: darkgreen;
+  background-color: #EBA312;
   color: white;
-  font-size: 20px;
+  font-size: 10px;
   margin: 0;
   justify-content: center;
 }
@@ -135,37 +123,6 @@ h2{
  font-weight: bold;
  text-align: center;
 }
-table{
-  border-collapse: collapse;
-  border: 2px green solid;
-  box-shadow: 5px 5px 5px darkgreen;
-}
-td,th{
-  border: 3px solid #ddd;
-  padding: 5px 5px;
-}
-th{
-  background-color: darkgreen;
-  color: white;
-  }
-input[type=submit]{
-  background-color: lightgray;
-  display: block;
-}
-input{
-  margin-bottom: 1em;
-  display: block;
-}
-textarea{
-  margin-bottom: 1em;
-  display: block;
-}
-label{
-  float: left;
-  width: 8em;
-  padding-right: 1em;
-}
-
 footer{
 	text-align: center;
   background-color: #EBA312;
@@ -173,40 +130,6 @@ footer{
 	padding: 10px;
 	text-decoration: none;
   color: #05A5BF;
-}
-footer a{
-  text-decoration: none;
-}
-footer a:link{
-  color: #05A5BF;
-}
-footer a:visited{
-  color: #05A5BF;
-}
-footer a:hover{
-  color: #05A5BF;
-}
-footer a:active{
-  color: #05A5BF;
-}
-.video-container {
-    overflow: hidden;
-    position: relative;
-    width:100%;
-}
-
-.video-container::after {
-    padding-top: 56.25%;
-    display: block;
-    content: '';
-}
-
-.video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
 }
 .fa {
     color: #05A5BF;

@@ -11,49 +11,234 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 	   	<link rel="stylesheet" href="style.css">
 	</head>
-	<body>
+	<body onload="startGame()">
 		<header>
-			<img src="image/logo.PNG" alt="logo" height="82px" width="155px" class="img-fluid logo" style="display:block;margin:0 auto;">
+			<img src="images/logo.PNG" alt="logo" height="82px" width="155px" class="img-fluid logo" style="display:block;margin:0 auto;">
 		</header>
 		<nav>
 			<ul>
-			    <li><a href="index.html">Home</a></li>
-			    <li><a href="resume.html">Resume</a></li>
-			    <li><a href="portfolio.html">Portfolio</a></li>
-			    <li><a href="contact.html">Contact</a></li> 
+				<li><a href="index.html">Home</a></li>
+				<li><a href="resume.html">Resume</a></li>
+				<li><a href="portfolio.html">Portfolio</a></li>
+				<li><a href="contact.html">Contact</a></li> 
 			</ul>
 		</nav>
-		<div id="bread"></div>
 		<main>
 			<!--This is the main section-->
-			<h2>Multimedia</h2>
-			<h3>Google Maps</h3>
-			<p>This is the location of my school</p>
-			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2823.731868752793!2d-93.11344968424581!3d44.94911847568452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87f62aa4b9cbd887%3A0xee7598b8b07f1abc!2sSaint%20Paul%20College!5e0!3m2!1sen!2sus!4v1679614161328!5m2!1sen!2sus" width="100%" height="315" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-			<h3>You Tube</h3>
-			<p>Funny South Park short</p>
-			<div class="video-container">
-			<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/kQWXoQZWlMw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-12"> 
+						<div class="column"><div id="bread"></div></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12"> 
+						<div class="column"><h2>Designs</h2></div>
+					</div>
+				</div>	
+				<div class="row">
+					<div class="col-sm-6"> 
+						<div class="column"><div id="puppies"></div></div>
+					</div>
+					<div class="col-sm-6"> 
+						<div class="column"><div id="animals"></div>
+					</div>
+				</div>		
+				<div class="row">
+					<div class="col-sm-12"> 
+						<div class="column"><h2>JavaScript game</h2></div>
+					</div>
+				</div>	
+				<div class="row">
+					<div class="col-sm-12"> 
+						<div class="column"><p>This game was obtain from w3school and modified using CSS.</p></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12"> 
+						<div class="column">
+							<style>
+			      				canvas {
+			      					background-image:url(images/halloween.jpg);
+			      					background-size: contain;
+			      					border:3px solid #d3d3d3;
+			      					background-color: pink;
+			      					margin: 0 auto;
+			      					display: block;
+			      				}
+			   				</style>
+				   			<!-- This is the HTMLcode. It will be in the <main> section of your website --> 
+				   			<div id="game" ></div>
+				   			<div class="game-controls">
+				      			<button class="myButton" onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">ACCELERATE</button>
+				      			<a href=portfolio.html><button class="Restart">RESTART</button></a>
+				   			</div>
+
+							<!-- This is the JavaScript for the game-->
+
+				   			<script>
+				      			var myGamePiece;
+				     			var myObstacles = [];
+				      			var myScore;
+				      
+				      			function startGame() {
+				          			myGamePiece = new component(30, 30, "images/witch.png", 10, 120, "image");
+				         	 		myGamePiece.gravity = 0.05;
+				          			myScore = new component("30px", "Consolas", "orange", 420, 40, "text");
+				          			myGameArea.start();
+				      			}
+				      
+				      			var myGameArea = {
+				          			canvas : document.createElement("canvas"),
+				          			start : function() {
+				              			this.canvas.width = 640;
+				              			this.canvas.height = 360;
+				              			this.context = this.canvas.getContext("2d");
+				              			var myGame = document.getElementById("game");
+				              			myGame.insertBefore(this.canvas, myGame.childNodes[0]);        
+				              			this.frameNo = 0;
+				              			this.interval = setInterval(updateGameArea, 20);
+				           			},
+				          			clear : function() {
+				              			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+				          			}
+				      			}
+				      
+				      			function component(width, height, color, x, y, type) {
+				      	  			this.type = type;
+				      	  			if (type == "image") {
+	            		  				this.image = new Image();
+	            		  				this.image.src = color;
+	          			  			}
+				          			this.score = 0;
+				          			this.width = width;
+				          			this.height = height;
+				          			this.speedX = 0;
+				          			this.speedY = 0;    
+				          			this.x = x;
+				          			this.y = y;
+				          			this.gravity = 0;
+				          			this.gravitySpeed = 0;
+				          			this.update = function() {
+				            			ctx = myGameArea.context;
+				            			if (type == "image") {
+	      			          				ctx.drawImage(this.image,
+	        								this.x,
+	       									this.y,
+	        								this.width, this.height);
+	             			 			}
+	             			 			else if (this.type == "text") {
+				                  			ctx.font = this.width + " " + this.height;
+				                  			ctx.fillStyle = color;
+				                  			ctx.fillText(this.text, this.x, this.y);
+				              			}
+				              			else {
+				                  			ctx.fillStyle = color;
+				                  			ctx.fillRect(this.x, this.y, this.width, this.height);
+				              			}
+				          			}
+				          			this.newPos = function() {
+				              			this.gravitySpeed += this.gravity;
+				              			this.x += this.speedX;
+				              			this.y += this.speedY + this.gravitySpeed;
+				              			this.hitBottom();
+				              			this.hitTop();
+				          			}
+				          			this.hitBottom = function() {
+				              			var rockbottom = myGameArea.canvas.height - this.height;
+				              			if (this.y > rockbottom) {
+				                  			this.y = rockbottom;
+				                  			this.gravitySpeed = 0;
+				              			}
+				           			}
+				           			this.hitTop = function() {
+				              			var skytop = myGameArea.canvas.height - 360;
+				              			if (this.y < skytop) {
+				                  			this.y = skytop;
+				                  			this.gravitySpeed = 0;
+				              			}
+				           			}
+				          			this.crashWith = function(otherobj) {
+				              			var myleft = this.x;
+				              			var myright = this.x + (this.width);
+				              			var mytop = this.y;
+				              			var mybottom = this.y + (this.height);
+				              			var otherleft = otherobj.x;
+				              			var otherright = otherobj.x + (otherobj.width);
+				              			var othertop = otherobj.y;
+				              			var otherbottom = otherobj.y + (otherobj.height);
+				              			var crash = true;
+				              			if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+				                  			crash = false;
+				              			}
+				              			return crash;
+				          			}
+				      			}
+				      
+				      			function updateGameArea() {
+				          			var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+				          			for (i = 0; i < myObstacles.length; i += 1) {
+				              			if (myGamePiece.crashWith(myObstacles[i])) {
+				                  			return;
+				              			} 
+				          			}
+				          			myGameArea.clear();
+				          			myGameArea.frameNo += 1;
+				          			if (myGameArea.frameNo == 1 || everyinterval(150)) {
+				              			x = myGameArea.canvas.width;
+				              			minHeight = 20;
+				              			maxHeight = 200;
+				              			height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+				              			minGap = 50;
+				              			maxGap = 200;
+				              			gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+				              			myObstacles.push(new component(20, height, "purple", x, 0));
+				              			myObstacles.push(new component(20, x - height - gap, "purple", x, height + gap));
+				          			}
+				          			for (i = 0; i < myObstacles.length; i += 1) {
+				              			myObstacles[i].x += -1;
+				              			myObstacles[i].update();
+				          			}
+				          			myScore.text="SCORE: " + myGameArea.frameNo;
+				          			myScore.update();
+				          			myGamePiece.newPos();
+				          			myGamePiece.update();
+				      			}
+				      
+				      			function everyinterval(n) {
+				          			if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
+				          			return false;
+				      			}
+				      
+				      			function accelerate(n) {
+				          			myGamePiece.gravity = n;
+				      			}
+				   			</script>
+			   			</div>
+					</div>
+				</div>
 			</div>
-			<h3>Sound Cloud</h3>
-			<p>Random Music</p>
-			<iframe width="560" height="315" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1470385906&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/eslabonarmado" title="Eslabon Armado" target="_blank" style="color: #cccccc; text-decoration: none;">Eslabon Armado</a> · <a href="https://soundcloud.com/eslabonarmado/eslabon-armado-peso-pluma-ella" title="Eslabon Armado, Peso Pluma - Ella Baila Sola" target="_blank" style="color: #cccccc; text-decoration: none;">Eslabon Armado, Peso Pluma - Ella Baila Sola</a></div>
 		</main>
 		<footer>
-			<p><i class="fa fa-linkedin" aria-hidden="true"></i>
-			<a href="https://saintpaul.edu" target="_blank">Guadalupe Valadez</a></p>
-			<p><i class="fa fa-envelope" aria-hidden="true"></i>
-			<a href="mailto: guadalupe_valadez@trimble.com">Email me</a>&bull;
-			<i class="fa fa-phone" aria-hidden="true"></i>
-			<a href="tel:9999999999">999-999-9999</a>&bull;
-			<i class="fa fa-comments" aria-hidden="true"></i>
-			<a href="sms:9999999999">Text me</a>
-			</p>
-			<small>&copy; Copyright All rights reserved.</small>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-6"> 
+						<div class="column"><h3>Guadalupe Portfolio</h3><p>This website was designed in html class in order to create a resume portfolio.</p></div>
+						</div>
+					<div class="col-sm-6"> 
+						<div class="column"><h3>Connect in GitHub</h3><p><i class="fa fa-github" aria-hidden="true"></i>GitHub<br></p></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12"> 
+						<div class="column"><small>&copy; Copyright All rights reserved.</small></div>
+					</div>
+				</div>
+			</div>
 		</footer>
 		<!--jQuery, Popper, and Bootstrap Javascript files-->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+	    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+	    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 	</body>
 </html>
