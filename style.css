@@ -56,7 +56,7 @@ body{
    background-repeat:no-repeat;
 }
 #bread {
-   background-image:url(images/bread.PNG);
+   background-image:url(images/bread.png);
    height: 300px;
    background-size: cover;
    background-repeat:no-repeat;
